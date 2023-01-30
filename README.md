@@ -8,6 +8,8 @@ author, date and title are to be set in ```main.text```
 
 The normal content can be put in ```content.tex```
 
+```logo_7.png``` should be replaced by the logo of your organisation!
+
 *Please use a UTF8 enabled engine like XeLaTeX or LuaLaTeX*
 
 ---
