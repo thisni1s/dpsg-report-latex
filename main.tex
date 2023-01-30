@@ -1,0 +1,88 @@
+\documentclass[12pt, parskip=full]{scrartcl}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage[placement=top, angle=6]{background}
+\usepackage{xcolor}
+\usepackage[automark,headsepline=.3pt,footsepline=.3pt]{scrlayer-scrpage}
+\usepackage[a4paper,left=20mm,right=20mm,top=25mm,bottom=25mm,includeheadfoot]{geometry}
+\usepackage[ngerman]{babel}
+\usepackage{lmodern}
+\usepackage{tabularx}
+\usepackage{blindtext}
+\renewcommand*\familydefault{\sfdefault}
+
+\backgroundsetup{contents=\includegraphics{lilie2.pdf}, scale=0.35, opacity=0.2, position={7mm, 38mm}}
+
+\definecolor{dpsgbeige}{RGB}{199,189,173}
+\definecolor{dpsgblue}{RGB}{0,48,86}
+
+
+\addtokomafont{section}{%
+    \color{dpsgblue}
+}
+\addtokomafont{subsection}{%
+    \color{dpsgblue}
+}
+\addtokomafont{subsubsection}{%
+    \color{dpsgblue}
+}
+\addtokomafont{paragraph}{%
+    \color{dpsgblue}
+}
+\addtokomafont{title}{%
+    \color{dpsgblue}
+}
+
+\newcommand\titel{DPSG Report}
+\author{DPSG Stamm XXX}
+\date{15.01.2023}
+\title{\titel}
+
+% header and footer
+\usepackage[automark,headsepline=.3pt,footsepline=.3pt]{scrlayer-scrpage}
+\clearpairofpagestyles
+\chead{\leftmark}
+\ifoot{
+    \textcolor{black}{\titel}
+}
+
+\newcommand\pagenumberwidth{\textwidth}% <- width of the black box
+%\ofoot{\makebox[\pagenumberwidth]{ \color{black} Seite \thepage }}
+\rofoot{ \color{black} Seite \thepage \color{dpsgbeige}.} %<- very bad hack probably
+
+% new layer for the pagenumber background:
+\DeclareNewLayer[
+    clone=scrheadings.foot.oneside,% <- clone the foot layer
+    contents={\color{dpsgbeige} \rule{\pagenumberwidth}{\baselineskip}}%<- black rule
+  ]{pagenumber.bg}
+% add the new layer to the pagestyle before the foot layer:
+\AddLayersToPageStyleBeforeLayer{scrheadings}{pagenumber.bg}{scrheadings.foot.oneside}
+
+% fonts
+\addtokomafont{pageheadfoot}{\small\upshape\color{white}}% <- footer linie weiß damit man sie nicht sieht
+
+\begin{document}
+
+\maketitle
+\tikz [remember picture, overlay] %
+\node [shift={(-1cm,-1cm)}] at (current page.north east) %
+[anchor=north east] %
+{\includegraphics[width=6cm]{logo_7.png}};
+
+\tikz [remember picture, overlay]
+\node [shift={(-195mm,-146mm)}] at (current page.north east) %
+[anchor=north east] %
+{\includegraphics{start.png}};
+
+\tikz [remember picture, overlay]
+\node [shift={(-11mm, 7mm)}] at (current page.south east) %
+[anchor=south east] %
+{\includegraphics{end.png}};
+
+
+\input{content}
+
+
+
+
+\end{document}
